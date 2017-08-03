@@ -9,7 +9,7 @@
         - firewall
 
     - name: close selinux
-      shell: "sed -i 's/SELINUX=enforcing/SELINUX=disabled/' {{selinux_file}}; setenforce 0; fi &&  touch {{tmp_dir}}/selinux.done"
+      shell: "sed -i 's/SELINUX=enforcing/SELINUX=disabled/' {{selinux_file}}; setenforce 0;touch {{tmp_dir}}/selinux.done"
       args:
         creates: "{{tmp_dir}}/selinux.done"
       tags:
