@@ -2,6 +2,9 @@
 #Step1: complie && install zabbix_agent
     - name: copy zabbix package
       copy: src={{local_dir}}/zabbix-3.0.3.tar.gz dest={{tmp_dir}}/zabbix-3.0.3.tar.gz
+      
+    - name: add zabbix
+      shell: "groupadd zabbix; useradd -g zabbix zabbix"
 
     - name: unpack zabbix package
       shell: "yum -y install gcc; cd {{tmp_dir}} && if [ ! -d zabbix-3.0.3 ]; then tar -zxvf zabbix-3.0.3.tar.gz; fi"
