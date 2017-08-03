@@ -5,6 +5,8 @@
       
     - name: add zabbix
       shell: "groupadd zabbix; useradd -g zabbix zabbix"
+      tags:
+        - add
 
     - name: unpack zabbix package
       shell: "yum -y install gcc; cd {{tmp_dir}} && if [ ! -d zabbix-3.0.3 ]; then tar -zxvf zabbix-3.0.3.tar.gz; fi"
