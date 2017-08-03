@@ -1,0 +1,20 @@
+---
+- hosts: webservers
+  become: yes
+
+  vars_files:
+    - agent_vars.yml
+
+  tasks: 
+    - name: complie && install zabbix_agent
+      include: install-agent.yml
+      tags: step1
+
+    - name: config zabbix_agent
+      include: config-agent.yml
+      tags: step2
+  
+  handlers: 
+    - name: restart zabbix_agentd
+      service: name=zabbix_agentd state=restarted
+
