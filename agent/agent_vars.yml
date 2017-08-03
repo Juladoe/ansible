@@ -1,0 +1,5 @@
+---
+local_dir: /home/wn/example
+tmp_dir: /root/tmp_done
+install_dir: /usr/local/zabbix
+server_ip: 192.168.67.132
