@@ -1,0 +1,20 @@
+---
+#Step2: config zabbix_agent
+    - name: modify the config
+      shell: "sed -i 's/^Server=127.0.0.1/Server={{server_ip}}/' {{install_dir}}/etc/zabbix_agentd.conf && sed -i 's/^ServerActive=127.0.0.1/ServerActive={{server_ip}}/' {{install_dir}}/etc/zabbix_agentd.conf  && sed -i 's/^Hostname=Zabbix server/Hostname=localhost/' {{install_dir}}/etc/zabbix_agentd.conf"
+      tags:
+        - agent-config
+        - config
+    
+    - name: modify system config
+      shell: "cp {{tmp_dir}}/zabbix-3.0.3/misc/init.d/tru64/zabbix_agentd /etc/init.d/ && chmod +x /etc/init.d/zabbix_agentd"
+      tags:
+        - system-config
+        - config
+      notify:
+        - restart zabbix_agentd
+
+    - name: create soft-link
+      shell: "ln -s {{install_dir}}/sbin/* /usr/local/sbin/ && ln -s {{install_dir}}/bin/* /usr/local/bin/"
+      tags: 
+        - soft-link
