@@ -4,7 +4,7 @@
       copy: src={{local_dir}}/zabbix-3.0.3.tar.gz dest={{tmp_dir}}/zabbix-3.0.3.tar.gz
 
     - name: unpack zabbix package
-      shell: "cd {{tmp_dir}} && if [ ! -d zabbix-3.0.3 ]; then tar -zxvf zabbix-3.0.3.tar.gz; fi"
+      shell: "yum -y install gcc; cd {{tmp_dir}} && if [ ! -d zabbix-3.0.3 ]; then tar -zxvf zabbix-3.0.3.tar.gz; fi"
       tags:
         - unpack
 
