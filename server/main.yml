@@ -1,0 +1,28 @@
+---
+
+- hosts: zabbix-servers
+  become: yes  
+  vars_files:  
+    - default_vars.yml  
+  tasks:  
+    - name: install many packages  
+      include: prepare.yml  
+      tags:  
+        - setup1  
+  
+    - name: set environment parameters  
+      include: set-env.yml  
+      tags:  
+        - setup2  
+  
+    - name: import tables to zabbix database  
+      include: set-zabbix.yml  
+      tags:  
+        - setup3  
+  
+    - name: install zabbix && modify config  
+      include: install-zabbix.yml  
+      tags:   
+        - setup4  
+  handlers:
+   - include: handler.yml  
